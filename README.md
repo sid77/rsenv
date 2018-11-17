@@ -1,7 +1,8 @@
 # rsenv
 Extra simple companion to
 [semarie/build-rust](https://github.com/semarie/build-rust) for easy switching
-between Rust versions. Loosely inspired by rbenv.
+between Rust versions. Loosely inspired by
+[rbenv/rbenv](https://github.com/rbenv/rbenv).
 
 ## Prerequisites
 Set `install_dir` in `$HOME/.build_rust.conf`.
