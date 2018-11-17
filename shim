@@ -1,0 +1,26 @@
+#!/bin/ksh -eu
+
+[[ -n ${DEBUG:-} ]] && set -x
+
+# load default variables from build_rust.conf and then our own rc
+RSENV_VERSION=${RSENV_VERSION:-"system"}
+[[ -r "${HOME}/.build_rust.conf" ]] && . "${HOME}/.build_rust.conf"
+
+# sanity checks
+[[ $RSENV_VERSION != "beta" \
+  && $RSENV_VERSION != "nightly" \
+  && $RSENV_VERSION != "system" ]] \
+  && echo "RSENV_VERSION can only be 'nightly', 'beta', or 'system'" \
+  && exit 1
+[[ -z "$install_dir" ]] \
+  && echo "Missing install_dir!" \
+  && exit 1
+
+# build install prefix
+prefix="/usr/local"
+[[ $RSENV_VERSION != "system" ]] \
+  && prefix="$install_dir/$RSENV_VERSION"
+
+# run the command
+command="$(basename "$0")"
+"$prefix/bin/$command" "$@"
